@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: mysql_test
+    build: ./docker
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: ${ROOT_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      TZ: ${TZ}
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./docker/sql:/var/lib/mysql/sql
+      - ./docker/config/my.cnf:/etc/mysql/conf.d/my.cnf
+volumes:
+  db-store:
