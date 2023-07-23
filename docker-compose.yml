@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   db:
-    container_name: mysql_test
+    container_name: mysql-test
     build: ./docker
     platform: linux/x86_64
     environment:
@@ -15,7 +15,7 @@ services:
       - ${DB_PORT}:3306
     volumes:
       - db-store:/var/lib/mysql
-      - ./docker/sql:/var/lib/mysql/sql
+      - ./docker/sql:/docker-entrypoint-initdb.d
       - ./docker/config/my.cnf:/etc/mysql/conf.d/my.cnf
 volumes:
   db-store:
